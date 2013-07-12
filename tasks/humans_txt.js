@@ -8,43 +8,84 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function( grunt ) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+    grunt.registerMultiTask( 'humans_txt', 'Creating required HTML5 manifest files', function( ) {
+        // Merge task-specific and/or target-specific options with these defaults.
+        //
 
-  grunt.registerMultiTask('humans_txt', 'Your task description goes here.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+        function formatKey( str ) {
+            return str.replace( /\w\S*/g, function( txt ) {
 
-    // Iterate over all specified file groups.
-    this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
+                return txt.charAt( 0 ).toUpperCase( ) + txt.substr( 1 ).toLowerCase( ).replace( '_', ' ' );
+
+            } );
         }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+        var options = this.options( {
+            stats: false,
+            intro: 'The humans responsible & technology colophon'
+        } );
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+        this.files.forEach( function( f ) {
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
-    });
-  });
+            var files,
+                date = ( options.date ) ? options.date : new Date( ),
+                contents;
+
+            // Set save location
+            if ( !f.dest ) {
+                f.dest = options.fileName;
+            }
+
+            // Start creation of CACHE MANIFEST
+            contents = '# humanstxt.org/\n';
+
+            contents += '\n#' + options.intro + '+\n';
+
+            // Optional TimeStamp ( can be overriden with option value )
+            if ( options.content ) {
+
+                for ( var section in options.content ) {
+
+                    contents += '\n# ' + section.toUpperCase( ) + '\n\n';
+
+                    var sectionDetails = options.content[ section ];
+
+                    if ( typeof sectionDetails === 'string' ) {
+                        sectionDetails = [ ].concat( sectionDetails );
+                    }
+
+                    for ( var i = 0; i < sectionDetails.length; i++ ) {
+
+                        if ( typeof sectionDetails[ i ] === 'string' ) {
+                            contents += sectionDetails[ i ] + '\n';
+                        } else {
+
+                            for ( var keyTech in sectionDetails[ i ] ) {
+
+                                grunt.log.writeln( keyTech );
+
+                                var objTech = sectionDetails[ i ][ keyTech ];
+
+                                contents += formatKey(keyTech) + ": " + objTech + '\n';
+
+                            }
+
+                            contents += '\n';
+                        }
+
+                    }
+
+                }
+            }
+
+            grunt.file.write( f.dest, contents );
+
+            grunt.log.writeln( 'File "' + f.dest + '" created.' );
+
+        } );
+
+    } );
 
 };
