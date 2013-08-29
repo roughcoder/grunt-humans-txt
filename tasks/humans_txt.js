@@ -10,22 +10,40 @@
 
 module.exports = function( grunt ) {
 
-    grunt.registerMultiTask( 'humans_txt', 'Creating required HTML5 manifest files', function( ) {
-        // Merge task-specific and/or target-specific options with these defaults.
-        //
+    grunt.registerMultiTask( 'humans_txt', 'Generate information about people behind the website', function( ) {
 
-        function formatKey( str ) {
+        var options = this.options( {
+            commentStyle: 'c',
+            tab: '\t',
+            intro: 'The humans responsible & colophon'
+        } ),
+        formatKey = function ( str ) {
             return str.replace( /\w\S*/g, function( txt ) {
 
                 return txt.charAt( 0 ).toUpperCase( ) + txt.substr( 1 ).toLowerCase( ).replace( '_', ' ' );
 
             } );
+        },
+        writeComment;
+
+        switch ( options.commentStyle ) {
+            case 'c':
+                writeComment = function ( str ) {
+                    return '/* ' + str + ' */\n';
+                };
+                break;
+            case 'u':
+                writeComment = function ( str ) {
+                    return '# ' + str + '\n';
+                };
+                break;
+            case 'p':
+                writeComment = function ( str ) {
+                    return '// ' + str + '\n';
+                };
+                break;
         }
 
-        var options = this.options( {
-            stats: false,
-            intro: 'The humans responsible & technology colophon'
-        } );
 
         this.files.forEach( function( f ) {
 
@@ -39,16 +57,18 @@ module.exports = function( grunt ) {
             }
 
             // Start creation of CACHE MANIFEST
-            contents = '# humanstxt.org/\n';
+            contents = writeComment( options.intro );
 
-            contents += '\n#' + options.intro + '+\n';
+            contents += writeComment( 'humanstxt.org' );
 
             // Optional TimeStamp ( can be overriden with option value )
             if ( options.content ) {
 
                 for ( var section in options.content ) {
 
-                    contents += '\n# ' + section.toUpperCase( ) + '\n\n';
+                    contents += '\n';
+
+                    contents += writeComment( section.toUpperCase() );
 
                     var sectionDetails = options.content[ section ];
 
@@ -59,20 +79,20 @@ module.exports = function( grunt ) {
                     for ( var i = 0; i < sectionDetails.length; i++ ) {
 
                         if ( typeof sectionDetails[ i ] === 'string' ) {
-                            contents += sectionDetails[ i ] + '\n';
+                            contents += options.tab + sectionDetails[ i ] + '\n';
                         } else {
 
                             for ( var keyTech in sectionDetails[ i ] ) {
 
-                                grunt.log.writeln( keyTech );
-
                                 var objTech = sectionDetails[ i ][ keyTech ];
 
-                                contents += formatKey(keyTech) + ": " + objTech + '\n';
+                                contents += options.tab + formatKey(keyTech) + ": " + objTech + '\n';
 
                             }
 
-                            contents += '\n';
+                            if (i != sectionDetails.length - 1) {
+                                contents += '\n';
+                            }
                         }
 
                     }

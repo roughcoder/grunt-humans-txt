@@ -37,17 +37,27 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### commentStyle
+Choices: `'c'`, `'u'`, `'p'`
+Default value: `'c'`
+
+Style of comments with section titles. Use `'c'` for C style, `'u'` for unix
+style, and `'p'` for PHP style.
+
+```
+/* C STYLE COMMENT */
+
+\# UNIX STYLE COMMENT
+
+// PHP STYLE COMMENT
+```
+
+
+#### tab
 Type: `String`
-Default value: `',  '`
+Default value: `'\t'`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+A string value that is used advance nested values.
 
 ### Usage Examples
 

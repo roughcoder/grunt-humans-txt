@@ -41,7 +41,7 @@ module.exports = function( grunt ) {
       options: {
         content: {
           team: [ {
-              'Name': 'Neil Barton',
+              'Front-end developer': 'Neil Barton',
               'Site': 'http://www.roughcoder.com',
               'Twitter': '@roughcoder'
           },
