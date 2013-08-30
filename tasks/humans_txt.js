@@ -49,7 +49,7 @@ module.exports = function( grunt ) {
 
             var files,
                 date = ( options.date ) ? options.date : new Date( ),
-                contents;
+                contents = '';
 
             // Set save location
             if ( !f.dest ) {
@@ -57,7 +57,9 @@ module.exports = function( grunt ) {
             }
 
             // Start creation of CACHE MANIFEST
-            contents = writeComment( options.intro );
+            if ( options.intro ) {
+              contents += writeComment( options.intro );
+            }
 
             contents += writeComment( 'humanstxt.org' );
 
@@ -69,6 +71,10 @@ module.exports = function( grunt ) {
                     contents += '\n';
 
                     contents += writeComment( section.toUpperCase() );
+
+                    if (section.toLowerCase() === 'site') {
+                      contents += options.tab + "Last update: " + date.getDate() + "/"	+ ( date.getMonth()	+ 1 ) + "/"	+ date.getFullYear() + '\n';
+                    }
 
                     var sectionDetails = options.content[ section ];
 
@@ -90,7 +96,7 @@ module.exports = function( grunt ) {
 
                             }
 
-                            if (i != sectionDetails.length - 1) {
+                            if (i !== sectionDetails.length - 1) {
                                 contents += '\n';
                             }
                         }

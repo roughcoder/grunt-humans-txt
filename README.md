@@ -37,6 +37,13 @@ grunt.initConfig({
 
 ### Options
 
+#### intro
+Type: `String`
+Default value: `'The humans responsible & colophon'`
+
+A string value that is used in the head of the file.
+
+
 #### commentStyle
 Choices: `'c'`, `'u'`, `'p'`
 Default value: `'c'`
@@ -57,7 +64,7 @@ style, and `'p'` for PHP style.
 Type: `String`
 Default value: `'\t'`
 
-A string value that is used advance nested values.
+A string value that is used to advance nested values.
 
 ### Usage Examples
 

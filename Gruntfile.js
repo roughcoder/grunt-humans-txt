@@ -11,7 +11,7 @@
 module.exports = function( grunt ) {
 
   var fs = require( 'fs' ),
-    pJSON = JSON.parse( fs.readFileSync( 'package.json', 'utf8' ) )
+    pJSON = JSON.parse( fs.readFileSync( 'package.json', 'utf8' ) );
 
     if ( !pJSON ) {
       grunt.log.writeln( 'Unable to find a package.json file.' );
@@ -32,7 +32,7 @@ module.exports = function( grunt ) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: [ 'exmaples' ],
+      tests: [ 'examples' ],
     },
 
     // Configuration to be run (and then tested).
@@ -53,7 +53,7 @@ module.exports = function( grunt ) {
           ],
           thanks: [
             {
-              'Name ': 'David Jones',
+              'Name': 'David Jones',
               'Website': 'www.google.com'
             }
           ],
