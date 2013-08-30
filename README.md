@@ -45,7 +45,7 @@ style, and `'p'` for PHP style.
 ```
 /* C STYLE COMMENT */
 
-\# UNIX STYLE COMMENT
+# UNIX STYLE COMMENT
 
 // PHP STYLE COMMENT
 ```
@@ -82,12 +82,12 @@ grunt.initConfig({
           'Twitter': '@roughcoder',
           'Location': 'London, UK'
 
-        },
-        {
-          'Ruby guy': 'Sam Jones',
-          'Site': 'http://www.samjones.com',
-          'Twitter': '@samjones'
-        }
+          },
+          {
+            'Ruby guy': 'Sam Jones',
+            'Site': 'http://www.samjones.com',
+            'Twitter': '@samjones'
+          }
         ],
         'thanks': [
           {
