@@ -1,0 +1,23 @@
+# The humans responsible & colophon
+# humanstxt.org
+
+# TEAM
+Web Developer: Neil Barton
+Site: http://www.roughcoder.com
+Twitter: @roughcoder
+Location: London, UK
+
+Ruby Guy: Sam Jones
+Site: http://www.samjones.com
+Twitter: @samjones
+
+# THANKS
+Name: David Jones
+Website: www.google.com
+
+# SITE
+Version: 0.2.0
+Site Url: https://github.com/roughcoder/grunt-humans-txt
+Keywords: gruntplugin
+Language: English
+Technology: node.js, apache
