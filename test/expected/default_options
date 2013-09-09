@@ -16,7 +16,7 @@
 	Website: www.google.com
 
 /* SITE */
-	Version: 0.2.1
+	Version: 1.0.0
 	Site Url: https://github.com/roughcoder/grunt-humans-txt
 	Keywords: gruntplugin
 	Language: English

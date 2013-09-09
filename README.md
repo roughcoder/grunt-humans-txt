@@ -130,6 +130,7 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-* 2013-09-09   v0.2.1   Test tweak to allow Travis
+* 2013-09-09   v1.0.0   NPM Release
+* 2013-09-09   v0.3.0   Test tweak to allow Travis
 * 2013-08-20   v0.2.0   Extended variability, tests
 * 2013-06-11   v0.1.0   Initial task.
