@@ -2,6 +2,8 @@
 
 > Generate a [humans.txt](http://humanstxt.org/) file for the website.
 
+[![Build Status](https://travis-ci.org//roughcoder/grunt-humans-txt.png)](https://travis-ci.org/roughcoder/grunt-humans-txt)
+
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
