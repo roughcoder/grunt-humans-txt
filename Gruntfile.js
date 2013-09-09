@@ -10,7 +10,7 @@
 
 module.exports = function( grunt ) {
 
-    // Project configuration.
+  // Project configuration.
   grunt.initConfig( {
     pkg: grunt.file.readJSON('package.json'),
 
@@ -18,16 +18,16 @@ module.exports = function( grunt ) {
       all: [
         'Gruntfile.js',
         'tasks/*.js',
-        '<%= nodeunit.tests %>',
+        '<%= nodeunit.tests %>'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: [ 'tmp' ],
+      tests: [ 'tmp' ]
     },
 
     // Configuration to be run (and then tested).
@@ -36,7 +36,7 @@ module.exports = function( grunt ) {
         options: {
           content: grunt.file.readJSON('test/fixtures/humans.json')
         },
-        dest: 'tmp/humans-external_file.txt',
+        dest: 'tmp/humans-external_file.txt'
       },
       options: {
         content: {
@@ -67,28 +67,28 @@ module.exports = function( grunt ) {
               'Technology': 'node.js, apache'
             }
           ]
-        },
+        }
       },
       default_options: {
         options: {
         },
-        dest: 'tmp/humans-default_options.txt',
+        dest: 'tmp/humans-default_options.txt'
       },
       original_style: {
         options: {
           commentStyle: 'u',
           includeUpdateIn: false,
-          tab: '',
+          tab: ''
         },
-        dest: 'tmp/humans-original_style.txt',
+        dest: 'tmp/humans-original_style.txt'
       }
 
     },
 
     // Unit tests.
     nodeunit: {
-      tests: [ 'test/*_test.js' ],
-    },
+      tests: [ 'test/*_test.js' ]
+    }
 
   } );
 

@@ -53,5 +53,5 @@ exports.humans_txt = {
     test.equal(actual, expected, 'should describe what the original style behavior is.');
 
     test.done();
-  },
+  }
 };

@@ -13,7 +13,7 @@ module.exports = function( grunt ) {
     grunt.registerMultiTask( 'humans_txt', 'Generate information about people behind the website', function( ) {
 
         var options = this.options( {
-                includeUpdateIn: 'site',
+                includeUpdateIn: false,
                 commentStyle: 'c',
                 tab: '\t',
                 intro: 'The humans responsible & colophon'
@@ -28,6 +28,7 @@ module.exports = function( grunt ) {
         } else {
             dest = this.files[0].dest;
         }
+
         if ( !options.content ) {
             grunt.verbose.warn('Destination not written because no content was provided.');
         }
