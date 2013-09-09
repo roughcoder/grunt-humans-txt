@@ -61,7 +61,7 @@ A string value that is used to advance nested values.
 
 #### includeUpdateIn
 Type: `String` or `false`
-Default value: `'site'`
+Default value: `false`
 
 Include current date as *Last update* in section with specified name. Set to `false` to disable.
 
