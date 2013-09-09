@@ -1,6 +1,6 @@
 # grunt-humans-txt
 
-> Grunt task to build a humans.txt file using data from any JSON file, i.e package.json file or directly from your Gruntfile. A humans.txt is a TXT file that contains information about the different people who have contributed to building the website.
+> Generate a [humans.txt](http://humanstxt.org/) file for the website.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -20,64 +20,106 @@ grunt.loadNpmTasks('grunt-humans-txt');
 ## The "humans_txt" task
 
 ### Overview
-In your project's Gruntfile, add a section named `humans_txt` to the data object passed into `grunt.initConfig()`.
+_Run this task with the `grunt humans_txt` command._
 
-```js
-grunt.initConfig({
-  humans_txt: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
-```
+The task creates a humans.txt file using data from any JSON file, i.e package.json file or directly from your Gruntfile. A humans.txt is a TXT file that contains information about the different people who have contributed to building the website.
+
+Task targets, files and options may be specified according to the grunt [Configuring tasks](http://gruntjs.com/configuring-tasks) guide.
 
 ### Options
 
-#### options.separator
+#### intro
 Type: `String`
-Default value: `',  '`
+Default value: `'The humans responsible & colophon'`
 
-A string value that is used to do something with whatever.
+A string value that is used in the head of the file.
 
-#### options.punctuation
+
+#### commentStyle
+Choices: `'c'`, `'u'`, `'p'`
+Default value: `'c'`
+
+Style of comments with section titles. Use `'c'` for C style, `'u'` for unix
+style, and `'p'` for PHP style.
+
+```
+/* C STYLE COMMENT */
+
+# UNIX STYLE COMMENT
+
+// PHP STYLE COMMENT
+```
+
+#### tab
 Type: `String`
-Default value: `'.'`
+Default value: `'\t'`
 
-A string value that is used to do something else with whatever else.
+A string value that is used to advance nested values.
+
+
+#### includeUpdateIn
+Type: `String` or `false`
+Default value: `'site'`
+
+Include current date as *Last update* in section with specified name. Set to `false` to disable.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Local Content
+In this example, the `content` options includes the data to be used. Each root item
+is a section.
 
 ```js
 grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
   humans_txt: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+    options: {
+      commentStyle: 'u',
+      content: {
+        'team': [ {
+          'Web developer': 'Neil Barton',
+          'Site': 'http://www.roughcoder.com',
+          'Twitter': '@roughcoder',
+          'Location': 'London, UK'
+
+          },
+          {
+            'Ruby guy': 'Sam Jones',
+            'Site': 'http://www.samjones.com',
+            'Twitter': '@samjones'
+          }
+        ],
+        'thanks': [
+          {
+            'Name': 'David Jones',
+            'Website': 'www.google.com'
+          }
+        ],
+        'site': [ {
+            'Version': '<%= pkg.version %>',
+            'Site Url': '<%= pkg.homepage %>',
+            'Keywords': '<%= pkg.keywords %>',
+            'Language': 'English',
+            'Technology': 'node.js, apache'
+          }
+        ]
+      },
     },
+    dest: 'humans.txt', 
   },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### External Content
+In this example, the content is read from external file.
 
 ```js
 grunt.initConfig({
   humans_txt: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      content: grunt.file.readJSON('humans.json')
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    dest: 'humans.txt', 
   },
 })
 ```
@@ -86,4 +128,5 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+* 2013-08-20   v0.2.0   Extended variability, tests
+* 2013-06-11   v0.1.0   Initial task.

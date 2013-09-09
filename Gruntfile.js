@@ -10,15 +10,10 @@
 
 module.exports = function( grunt ) {
 
-  var fs = require( 'fs' ),
-    pJSON = JSON.parse( fs.readFileSync( 'package.json', 'utf8' ) )
-
-    if ( !pJSON ) {
-      grunt.log.writeln( 'Unable to find a package.json file.' );
-    }
-
     // Project configuration.
   grunt.initConfig( {
+    pkg: grunt.file.readJSON('package.json'),
+
     jshint: {
       all: [
         'Gruntfile.js',
@@ -32,48 +27,60 @@ module.exports = function( grunt ) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: [ 'exmaples' ],
+      tests: [ 'tmp' ],
     },
 
     // Configuration to be run (and then tested).
     humans_txt: {
-
+      external_file: {
+        options: {
+          content: grunt.file.readJSON('test/fixtures/humans.json')
+        },
+        dest: 'tmp/humans-external_file.txt',
+      },
       options: {
         content: {
-          team: [ {
-              'Name': 'Neil Barton',
+          'team': [ {
+              'Web developer': 'Neil Barton',
               'Site': 'http://www.roughcoder.com',
-              'Twitter': '@roughcoder'
-          },
+              'Twitter': '@roughcoder',
+              'Location': 'London, UK'
+
+            },
             {
-              'Name': 'Sam Jones',
+              'Ruby guy': 'Sam Jones',
               'Site': 'http://www.samjones.com',
               'Twitter': '@samjones'
-          }
+            }
           ],
-          thanks: [
+          'thanks': [
             {
-              'Name ': 'David Jones',
+              'Name': 'David Jones',
               'Website': 'www.google.com'
             }
           ],
-          technology: [
-            'node.js, apache',
-            'Something else'
-          ],
-          language: [
-            'English'
-          ],
-          site: [ {
-              version: pJSON.version,
-              site_url: pJSON.homepage,
-              keyword: pJSON.keywords
-          }
+          'site': [ {
+              'Version': '<%= pkg.version %>',
+              'Site Url': '<%= pkg.homepage %>',
+              'Keywords': '<%= pkg.keywords %>',
+              'Language': 'English',
+              'Technology': 'node.js, apache'
+            }
           ]
-        }
+        },
       },
-      files: {
-        dest: 'examples/humans-default_options.txt'
+      default_options: {
+        options: {
+        },
+        dest: 'tmp/humans-default_options.txt',
+      },
+      original_style: {
+        options: {
+          commentStyle: 'u',
+          includeUpdateIn: false,
+          tab: '',
+        },
+        dest: 'tmp/humans-original_style.txt',
       }
 
     },

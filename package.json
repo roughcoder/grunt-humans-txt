@@ -1,11 +1,16 @@
 {
   "name": "grunt-humans-txt",
   "description": "Grunt task to build a humans.txt file using data from any JSON file, i.e package.json file or directly from your Gruntfile. A humans.txt is a TXT file that contains information about the different people who have contributed to building the website.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/roughcoder/grunt-humans-txt",
   "author": {
     "name": "Neil Barton",
     "email": "neil@roughcoder.com"
+  },
+  "contributors": {
+    "name": "Robin Pokorný",
+    "email": "robin@medvedi.eu",
+    "url": "http://robin.medvedi.eu"
   },
   "repository": {
     "type": "git",

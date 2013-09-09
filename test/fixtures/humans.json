@@ -1,0 +1,30 @@
+{
+    "team": [
+        {
+            "Web developer": "Neil Barton",
+            "Site": "http://www.roughcoder.com",
+            "Twitter": "@roughcoder",
+            "Location": "London, UK"
+        },
+        {
+            "Ruby guy": "Sam Jones",
+            "Site": "http://www.samjones.com",
+            "Twitter": "@samjones"
+        }
+    ],
+    "thanks": [
+        {
+          "Name": "David Jones",
+          "Website": "www.google.com"
+        }
+    ],
+    "site": [
+        {
+            "Version": "<%= pkg.version %>",
+            "Site Url": "<%= pkg.homepage %>",
+            "Keywords": "<%= pkg.keywords %>",
+            "Language": "English",
+            "Technology": "node.js, apache"
+        }
+    ]
+}
